@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "my8Pk5vuDUrMR+QZuGkOzgVM3TElgFL1ZIb3iWn4o9ugbP97MPIcahGjfAdLHUO8W5ljLGi7XXtoZrokWv9nWw==",
+  "dgSpecHash": "z0TYPqTT1wSF3ffBGcwCtrPtURk07Em6cpuEYVXjufDx1jiMB4DK1gBVbr+pKkQivprQOn11jm5n7beDXvh4CA==",
   "success": true,
-  "projectFilePath": "C:\\Bot\\Bot.csproj",
+  "projectFilePath": "C:\\Bot_Original\\Bot.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Gamaliel Garcia\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.0\\microsoft.aspnetcore.openapi.7.0.0.nupkg.sha512",
     "C:\\Users\\Gamaliel Garcia\\.nuget\\packages\\microsoft.entityframeworkcore\\7.0.0\\microsoft.entityframeworkcore.7.0.0.nupkg.sha512",

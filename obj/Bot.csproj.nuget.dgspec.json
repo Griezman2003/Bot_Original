@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Bot\\Bot.csproj": {}
+    "C:\\Bot_Original\\Bot.csproj": {}
   },
   "projects": {
-    "C:\\Bot\\Bot.csproj": {
+    "C:\\Bot_Original\\Bot.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Bot\\Bot.csproj",
+        "projectUniqueName": "C:\\Bot_Original\\Bot.csproj",
         "projectName": "Bot",
-        "projectPath": "C:\\Bot\\Bot.csproj",
+        "projectPath": "C:\\Bot_Original\\Bot.csproj",
         "packagesPath": "C:\\Users\\Gamaliel Garcia\\.nuget\\packages\\",
-        "outputPath": "C:\\Bot\\obj\\",
+        "outputPath": "C:\\Bot_Original\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Gamaliel Garcia\\AppData\\Roaming\\NuGet\\NuGet.Config",
