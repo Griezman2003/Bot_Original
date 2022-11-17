@@ -1,33 +1,31 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
-using Bot.Services;
+using System;
+using System.Collections.Generic;
+using System.Threading;
+using System.Threading.Tasks;
 using Telegram.Bot;
 
-namespace Bot.Controllers
+using Telegram.Bot.Types;
+using Telegram.Bot.Types.Enums;
+
+namespace Telegram.Bot
 {
-    [Route("[Controller]")]
-    [ApiController]
-    public class BotController: ControllerBase
+    class Program
     {
-        private readonly TelegramBotClient context;
+        static TelegramBotClient Bot = new TelegramBotClient("5743894715:AAH8UWLxPsMF5v3A1GEqjTemts8nLZUev0I");
 
-        public BotController(TelegramBotClient context)
+        static void Main(string[] args)
         {
-            this.context = context;
-        }
+            Bot.StartReceiving();
+            Bot.OnMessage += Bot_OnMessage;
 
-        [HttpGet]
-        public async Task<ActionResult<List<Bot>>> Get(){
-            return await context.ToListAsync();
+            Console.ReadLine();
+        } 
+        private static void Bot_OnMessage(object sender, Telegram.Bot.Args.MessageEventArgs e)
+    {
+        if (e.Message.Type == Telegram.Bot.Types.Enums.MessageType.Text)
+        {
+            Bot.SendTextMessageAsync(e.Message.Chat.Id, "bienvenido usario a telegram" + e.Message.Chat.Username);
         }
-   
-        [HttpPost]
-        public async Task<ActionResult> Post(Bot bot){
-            context.Add(bot);
-            await context.SaveChangesAsync();
-            return Ok();
-        }
-
     }
-
+    }
 }
