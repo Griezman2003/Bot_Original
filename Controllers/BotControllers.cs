@@ -1,31 +1,59 @@
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Telegram.Bot;
+using System;
+using Telegram.Bot.Exceptions;
 
-using Telegram.Bot.Types;
-using Telegram.Bot.Types.Enums;
 
-namespace Telegram.Bot
+namespace TelegramBot
 {
-    class Program
+    class program
     {
-        static TelegramBotClient Bot = new TelegramBotClient("5743894715:AAH8UWLxPsMF5v3A1GEqjTemts8nLZUev0I");
-
+        static ITelegramBotClient? _botClient;
         static void Main(string[] args)
         {
-            Bot.StartReceiving();
-            Bot.OnMessage += Bot_OnMessage;
+              _botClient = new TelegramBotClient("5743894715:AAH8UWLxPsMF5v3A1GEqjTemts8nLZUev0I");
+            
+            var me = _botClient.GetMeAsync().Result;
 
-            Console.ReadLine();
-        } 
-        private static void Bot_OnMessage(object sender, Telegram.Bot.Args.MessageEventArgs e)
-    {
-        if (e.Message.Type == Telegram.Bot.Types.Enums.MessageType.Text)
+            Console.WriteLine($"hi, i am {me.Id} and my name is: {me.FirstName}");
+            
+            _botClient.OnMessage += _botClient_OnMessage;
+            _botClient.StartReceiving();
+
+            Console.WriteLine("please enter any key to exit");
+            Console.ReadKey();
+
+            _botClient.StopReceiving();
+        }
+        private async static void _botClient_OnMessage(object sender, Telegram.Bot.Args.MessageEventArgs e)
         {
-            Bot.SendTextMessageAsync(e.Message.Chat.Id, "bienvenido usario a telegram" + e.Message.Chat.Username);
+            if (e.Message.Text != null)
+            {
+                Console.WriteLine($"message received");
+
+                if (e.Message.Text.ToLower().Contains("Message"))
+                {
+                    await _botClient.SendTextMessageAsync(
+                    chatId: e.Message.Chat.Id,
+                    text:$"this is Message"
+                    );
+            }
+               else if (e.Message.Text.ToLower().Contains("sticker"))
+               {
+                await _botClient.SendStickerAsync(
+                    chatId: e.Message.Chat.Id,sticker:"https://telegramchannels.me/storage/stickers/prosekaikaito/prosekaikaito.png"
+                 );
+               }
+               else if (e.Message.Text.ToLower().Contains("contact"))
+               {
+                   await _botClient.SendContactAsync(
+                    chatId: e.Message.Chat.Id,
+                    phoneNumber: "+52 9821075495",
+                    firstName:"Gamaliel",
+                    lastName:"Garcia"
+                   );
+               }
+            }
         }
     }
-    }
 }
+  
