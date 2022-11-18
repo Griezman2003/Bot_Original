@@ -22,9 +22,9 @@ namespace Bot.Controllers
           TelegramBotClient Bot = new TelegramBotClient("5743894715:AAH8UWLxPsMF5v3A1GEqjTemts8nLZUev0I");
          
         [HttpPost]
-          public async Task<ActionResult> Post(BotController botController){
-            bot.Add(alumno);
-            await context.SaveChangesAsync();
+          private async Task<ActionResult> Post(BotController botController){
+            bot.Add(botController);
+            await bot.SaveChangesAsync();
             return Ok();
     
     }
