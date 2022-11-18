@@ -15,19 +15,20 @@ namespace Bot.Controllers
         {
             this.bot = bot;
         }
-        static ITelegramBotClient? _botClient;
+        static TelegramBotClient botClient;
 
        static void Main(string[] args)
        {
           TelegramBotClient Bot = new TelegramBotClient("5743894715:AAH8UWLxPsMF5v3A1GEqjTemts8nLZUev0I");
          
         [HttpPost]
-          private async Task<ActionResult> Post(BotController botController){
-            bot.Add(botController);
-            await bot.SaveChangesAsync();
-            return Ok();
-    
-    }
+           async static void  Post(BotController botController,object sender, Telegram.Bot.Args.MessageEventArgs e)
+          {
+             await botClient.SendTextMessageAsync(
+                    chatId: e.Message.Chat.Id,
+                    text:$"this is Message"
+                    );
+           }
         }
        }
     }
