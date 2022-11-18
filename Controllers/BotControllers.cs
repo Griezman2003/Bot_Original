@@ -22,11 +22,14 @@ namespace Bot.Controllers
           TelegramBotClient Bot = new TelegramBotClient("https://api.telegram.org/bot5743894715:AAH8UWLxPsMF5v3A1GEqjTemts8nLZUev0I/getMe");
          
         [HttpPost]
-           async static void  Post(BotController botController,object sender, Telegram.Bot.Args.MessageEventArgs e)
-          {
-              await botClient.SendTextMessageAsync(
-                    chatId: e.Message.Chat.Id,text:"https://api.telegram.org"
-                 );
+           async static void  Post (BotController bot,object sender, Telegram.Bot.Args.MessageEventArgs e)
+                 { 
+                   await botClient.SendContactAsync(
+                    chatId: e.Message.Chat.Id,
+                    phoneNumber: "+52 9821075495",
+                    firstName:"Gamaliel",
+                    lastName:"Garcia"
+                   );
            }
         }
        }
