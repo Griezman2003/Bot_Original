@@ -1,12 +1,16 @@
 using Telegram.Bot;
 using System;
 using Telegram.Bot.Exceptions;
+using Microsoft.AspNetCore.Mvc;
 
-
-namespace TelegramBot
+namespace Bot_Original
 {
-    class program
+    [Route("[Controller]")]
+    [ApiController]
+    public class BotControllers: ControllerBase
     {
+    class program
+    { 
         static ITelegramBotClient? _botClient;
         static void Main(string[] args)
         {
@@ -24,7 +28,8 @@ namespace TelegramBot
 
             _botClient.StopReceiving();
         }
-        private async static void _botClient_OnMessage(object sender, Telegram.Bot.Args.MessageEventArgs e)
+        [HttpPost]
+        public async static void _botClient_OnMessage(object sender, Telegram.Bot.Args.MessageEventArgs e)
         {
             if (e.Message.Text != null)
             {
@@ -55,4 +60,5 @@ namespace TelegramBot
             }
         }
     }
+}
 }
