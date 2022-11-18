@@ -1,64 +1,36 @@
-using Telegram.Bot;
-using System;
-using Telegram.Bot.Exceptions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using Telegram.Bot;
+using Microsoft.EntityFrameworkCore;
 
-namespace Bot_Original
+namespace Bot.Controllers
 {
     [Route("[Controller]")]
     [ApiController]
-    public class BotControllers: ControllerBase
-    {
-    class program
-    { 
+    public class BotController: ControllerBase
+{
+
+     private readonly BotController bot;
+     public BotController(BotController bot)
+        {
+            this.bot = bot;
+        }
         static ITelegramBotClient? _botClient;
-        static void Main(string[] args)
-        {
-             ITelegramBotClient bot = new TelegramBotClient("5743894715:AAH8UWLxPsMF5v3A1GEqjTemts8nLZUev0I");
-            
-            var me = _botClient.GetMeAsync().Result;
 
-            Console.WriteLine($"hi, i am {me.Id} and my name is: {me.FirstName}");
-            
-            _botClient.OnMessage += _botClient_OnMessage;
-            _botClient.StartReceiving();
-
-            Console.WriteLine("please enter any key to exit");
-            Console.ReadKey();
-
-            _botClient.StopReceiving();
-        }
+       static void Main(string[] args)
+       {
+          TelegramBotClient Bot = new TelegramBotClient("5743894715:AAH8UWLxPsMF5v3A1GEqjTemts8nLZUev0I");
+         
         [HttpPost]
-        public async static void _botClient_OnMessage(object sender, Telegram.Bot.Args.MessageEventArgs e)
-        {
-            if (e.Message.Text != null)
-            {
-                Console.WriteLine($"message received");
-
-                if (e.Message.Text.ToLower().Contains("Message"))
-                {
-                    await _botClient.SendTextMessageAsync(
-                    chatId: e.Message.Chat.Id,
-                    text:$"this is Message"
-                    );
-            }
-               else if (e.Message.Text.ToLower().Contains("sticker"))
-               {
-                await _botClient.SendStickerAsync(
-                    chatId: e.Message.Chat.Id,sticker:"https://telegramchannels.me/storage/stickers/prosekaikaito/prosekaikaito.png"
-                 );
-               }
-               else if (e.Message.Text.ToLower().Contains("contact"))
-               {
-                   await _botClient.SendContactAsync(
-                    chatId: e.Message.Chat.Id,
-                    phoneNumber: "+52 9821075495",
-                    firstName:"Gamaliel",
-                    lastName:"Garcia"
-                   );
-               }
-            }
-        }
+          public async Task<ActionResult> Post(BotController botController){
+            bot.Add(alumno);
+            await context.SaveChangesAsync();
+            return Ok();
+    
     }
-}
-}
+        }
+       }
+    }
+      
+
+
