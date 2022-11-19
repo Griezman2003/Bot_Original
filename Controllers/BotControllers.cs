@@ -15,17 +15,14 @@ namespace Bot.Controllers
       [HttpPost]
       public async Task<IActionResult> Post([FromBody] Update update)
       {
-         TelegramBotClient client = new TelegramBotClient("https://api.telegram.org/bot5743894715:AAH8UWLxPsMF5v3A1GEqjTemts8nLZUev0I/getMe");
+         TelegramBotClient client = new TelegramBotClient("https://api.telegram.org/bot5303713753:AAGOKvMpgYI_bfDncV3Ody3GrAzw7PdZvcI/getMe");
          
          if (update.Type == Telegram.Bot.Types.Enums.UpdateType.Message)
          {
-            await client.SendTextMessageAsync(update.Message.From.Id, "answer");
+             await client.SendTextMessageAsync(update.Message.Chat.Id, "bienvenido");
+                    
          }
          return Ok();
       }
     }
 }
-
-      
-
-
